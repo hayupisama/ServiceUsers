@@ -1,10 +1,10 @@
-package com.mstradingcards.ServiceUsers.dto;
+package com.mstradingcards.ServicePlayers.dto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.mstradingcards.ServiceUsers.enums.Rarity;
+import com.mstradingcards.ServicePlayers.enums.Rarity;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.mstradingcards.ServiceUsers.enums;
+package com.mstradingcards.ServicePlayers.enums;
 
 public enum Rarity {
     COMMON,

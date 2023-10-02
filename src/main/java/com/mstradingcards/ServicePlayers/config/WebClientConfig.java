@@ -1,4 +1,4 @@
-package com.mstradingcards.ServiceUsers.config;
+package com.mstradingcards.ServicePlayers.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

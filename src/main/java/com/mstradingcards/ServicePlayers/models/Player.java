@@ -1,4 +1,4 @@
-package com.mstradingcards.ServiceUsers.models;
+package com.mstradingcards.ServicePlayers.models;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -17,11 +18,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "player")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Player {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +38,9 @@ public class User {
 
 	@ElementCollection
 	private List<Long> decks;
+	
+	@NotNull
+	private Long user_id;
 
 	public Long getId() {
 		return id;
@@ -68,6 +72,14 @@ public class User {
 
 	public void setDecks(List<Long> decks) {
 		this.decks = decks;
+	}
+
+	public Long getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
 	}
 
 }

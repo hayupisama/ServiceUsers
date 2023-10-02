@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mstradingcards</groupId>
-	<artifactId>ServiceUsers</artifactId>
+	<artifactId>ServicePlayers</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ServiceUsers</name>
+	<name>ServicePlayers</name>
 	<description>Service pour la gestion des Joueurs</description>
 	<properties>
 		<java.version>17</java.version>

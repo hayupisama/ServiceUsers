@@ -1,4 +1,4 @@
-package com.mstradingcards.ServiceUsers.dto;
+package com.mstradingcards.ServicePlayers.dto;
 
 import java.util.List;
 
