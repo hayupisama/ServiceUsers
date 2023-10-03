@@ -8,10 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"com.mstradingcards.ServiceUsers"})
-@EntityScan("com.mstradingcards.ServiceUsers.models")
-@EnableJpaRepositories("com.mstradingcards.ServiceUsers.repository")
-@ConfigurationPropertiesScan("com.mstradingcards.ServiceUsers.config")
+@ComponentScan({"com.mstradingcards.ServicePlayers"})
+@EntityScan("com.mstradingcards.ServicePlayers.models")
+@EnableJpaRepositories("com.mstradingcards.ServicePlayers.repository")
+@ConfigurationPropertiesScan("com.mstradingcards.ServicePlayers.config")
 public class ServicePlayersApplication {
 
 	public static void main(String[] args) {

@@ -26,8 +26,9 @@ public class PlayerController {
 	@Autowired
 	private PlayerService playerService;
 
-	@GetMapping("/getAllPLayers")
-	public List<PlayerDTO> getAllUsers() {
+	/* ADMIN ONLY */
+	@GetMapping("/getAllPlayers")
+	public List<PlayerDTO> getAllPlayers() {
 		return playerService.findAllPlayers();
 	}
 
@@ -48,36 +49,34 @@ public class PlayerController {
 		return playerService.searchPlayersByKeyword(keyword);
 	}
 
+	@PostMapping("/createPlayer")
+	public PlayerDTO createDeck(@RequestBody PlayerDTO playerDTO) {
+		return playerService.createPlayer(playerDTO);
+	}
+	/* ADMIN ONLY */
+
 	@GetMapping("/getAllCards")
 	public List<CartesDTO> getAllCards() {
 		return playerService.getAllCards();
 	}
 
-	@GetMapping("/getAllDecks")
-	public List<DeckDTO> getAllDecks() {
-		// TODO GET PLAYER ID FROM JWT TOKEN
-		Long playerId = -1L;
+	@GetMapping("/getAllDecks/{playerId}")
+	public List<DeckDTO> getAllDecks(@PathVariable Long playerId) {
 		return playerService.getAllPlayerDeck(playerId);
 	}
 
-	@PostMapping("/createDeck")
-	public DeckDTO createDeck(@RequestBody DeckDTO deckDTO) {
-		// TODO GET PLAYER ID FROM JWT TOKEN
-		Long playerId = -1L;
+	@PostMapping("/createDeck/{playerId}")
+	public DeckDTO createDeck(@RequestBody DeckDTO deckDTO, @PathVariable Long playerId) {
 		return playerService.createPlayerDeck(playerId, deckDTO);
 	}
 
-	@PutMapping("/updateDeck")
-	public DeckDTO updateDeck(@RequestBody DeckDTO deckDTO) {
-		// TODO GET PLAYER ID FROM JWT TOKEN
-		Long playerId = -1L;
+	@PutMapping("/updateDeck/{playerId}")
+	public DeckDTO updateDeck(@RequestBody DeckDTO deckDTO, @PathVariable Long playerId) {
 		return playerService.updatePlayerDeck(playerId, deckDTO);
 	}
 
-	@DeleteMapping("/deleteDeck/{name}")
-	public void deleteDeck(@PathVariable String name) {
-		// TODO GET PLAYER ID FROM JWT TOKEN
-		Long playerId = -1L;
+	@DeleteMapping("/deleteDeck/{name}/{playerId}")
+	public void deleteDeck(@PathVariable String name, @PathVariable Long playerId) {
 		playerService.deletePlayerDeck(playerId, name);
 	}
 

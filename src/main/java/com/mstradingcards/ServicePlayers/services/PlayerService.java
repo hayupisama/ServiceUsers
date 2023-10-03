@@ -25,21 +25,21 @@ public class PlayerService {
 	private WebClient webClient;
 
 	public Optional<PlayerDTO> findByUsername(String username) {
-		return playerRepository.findByUsername(username).map(this::mapToUserDTO);
+		return playerRepository.findByUsername(username).map(this::mapToPlayerDTO);
 	}
 
 	public Optional<PlayerDTO> findByEmail(String email) {
-		return playerRepository.findByEmail(email).map(this::mapToUserDTO);
+		return playerRepository.findByEmail(email).map(this::mapToPlayerDTO);
 	}
 
 	public List<PlayerDTO> searchPlayersByKeyword(String keyword) {
 		List<Player> players = playerRepository.searchPlayersByKeyword(keyword);
-		return players.stream().map(this::mapToUserDTO).collect(Collectors.toList());
+		return players.stream().map(this::mapToPlayerDTO).collect(Collectors.toList());
 	}
 
 	public List<PlayerDTO> findAllPlayers() {
 		List<Player> players = playerRepository.findAll();
-		return players.stream().map(this::mapToUserDTO).collect(Collectors.toList());
+		return players.stream().map(this::mapToPlayerDTO).collect(Collectors.toList());
 	}
 
 	/* Communication with DECKSERVICE */
@@ -50,9 +50,14 @@ public class PlayerService {
 	}
 
 	public List<CartesDTO> getAllCards() {
-		CartesDTO [] listCards = webClient.get().uri("http://localhost:8080/api/cards/getAllCards").retrieve()
+		CartesDTO[] listCards = webClient.get().uri("http://localhost:8080/api/cards/getAllCards").retrieve()
 				.bodyToMono(CartesDTO[].class).block();
 		return Arrays.asList(listCards);
+	}
+
+	public PlayerDTO createPlayer(PlayerDTO playerDTO) {
+		Player player = mapToPlayerEntity(playerDTO);
+		return mapToPlayerDTO(playerRepository.save(player));
 	}
 
 	public DeckDTO createPlayerDeck(Long userId, DeckDTO deckDTO) {
@@ -72,10 +77,18 @@ public class PlayerService {
 
 	/* Communication with DECKSERVICE */
 
-	private PlayerDTO mapToUserDTO(Player player) {
+	private PlayerDTO mapToPlayerDTO(Player player) {
 		PlayerDTO playerDTO = new PlayerDTO();
 		playerDTO.setUsername(player.getUsername());
 		playerDTO.setDecks(player.getDecks());
 		return playerDTO;
+	}
+
+	private Player mapToPlayerEntity(PlayerDTO playerDTO) {
+		Player player = new Player();
+		player.setUser_id(playerDTO.getUser_id());
+		player.setUsername(playerDTO.getUsername());
+		player.setEmail(playerDTO.getEmail());
+		return player;
 	}
 }
