@@ -11,6 +11,9 @@ import lombok.Data;
 @Data
 public class PlayerDTO {
 
+	@NotNull
+	private Long player_id;
+	
 	@NotBlank(message = "Username is required")
 	private String username;
 
