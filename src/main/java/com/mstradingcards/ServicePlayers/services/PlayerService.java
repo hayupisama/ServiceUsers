@@ -44,7 +44,7 @@ public class PlayerService {
 
 	/* Communication with DECKSERVICE */
 	public List<DeckDTO> getAllPlayerDeck(Long playerId) {
-		DeckDTO[] listDecks = webClient.get().uri("http://localhost:8081/api/decks/getAllDecks/"+playerId).retrieve()
+		DeckDTO[] listDecks = webClient.get().uri("http://localhost:8081/api/decks/getAllDecks/" + playerId).retrieve()
 				.bodyToMono(DeckDTO[].class).block();
 		return Arrays.asList(listDecks);
 	}
@@ -60,9 +60,9 @@ public class PlayerService {
 		return mapToPlayerDTO(playerRepository.save(player));
 	}
 
-	public DeckDTO createPlayerDeck(Long userId, DeckDTO deckDTO) {
-		return webClient.post().uri("http://localhost:8081/api/decks/createDeck").body(BodyInserters.fromValue(deckDTO))
-				.retrieve().bodyToMono(DeckDTO.class).block();
+	public DeckDTO createPlayerDeck(Long playerId, DeckDTO deckDTO) {
+		return webClient.post().uri("http://localhost:8081/api/decks/createDeck/" + playerId)
+				.body(BodyInserters.fromValue(deckDTO)).retrieve().bodyToMono(DeckDTO.class).block();
 	}
 
 	public DeckDTO updatePlayerDeck(Long userId, DeckDTO deckDTO) {
